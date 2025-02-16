@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "project-cost-estimator",
+  "private_key_id": "8c2f0f8f61ed800e79f3ca4f634f3d9a6b08b07f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASC...\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@project-cost-estimator.iam.gserviceaccount.com",
+  "client_id": "101318534909517722293",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc@project-cost-estimator.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
