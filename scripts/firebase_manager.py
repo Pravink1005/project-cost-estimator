@@ -5,9 +5,12 @@ import streamlit as st
 # Load Firebase credentials from Streamlit secrets
 firebase_config = st.secrets["firebase"]
 
+# Convert to dictionary format
+firebase_dict = {key: str(value) for key, value in firebase_config.items()}
+
 # Initialize Firebase if not already initialized
 if not firebase_admin._apps:
-    cred = credentials.Certificate(dict(firebase_config))  # Convert to dict
+    cred = credentials.Certificate(firebase_dict)
     firebase_admin.initialize_app(cred)
 
 # Connect to Firestore
