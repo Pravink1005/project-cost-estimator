@@ -3,9 +3,15 @@ import pandas as pd
 import joblib
 import numpy as np
 import os
-from scripts.risk_analysis import analyze_risk
-from scripts.report_generator import generate_pdf_report, generate_excel_report
-from scripts.firebase_manager import save_project_to_firebase, get_all_projects
+import sys  # Add this
+
+# Ensure the "scripts/" folder is recognized as a module
+sys.path.append("scripts")
+
+# Import project scripts after fixing module path
+from risk_analysis import analyze_risk
+from report_generator import generate_pdf_report, generate_excel_report
+from firebase_manager import save_project_to_firebase, get_all_projects
 
 # Ensure "reports" directory exists
 os.makedirs("reports", exist_ok=True)
