@@ -7,7 +7,7 @@ firebase_config = st.secrets["firebase"]
 
 # Initialize Firebase if not already initialized
 if not firebase_admin._apps:
-    cred = credentials.Certificate(firebase_config)
+    cred = credentials.Certificate.from_json(firebase_config)
     firebase_admin.initialize_app(cred)
 
 # Connect to Firestore
