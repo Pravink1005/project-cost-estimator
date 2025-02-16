@@ -1,14 +1,21 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
+import streamlit as st
+import json
 
-# Initialize Firebase
-cred = credentials.Certificate("firebase_key.json")  # Ensure the correct path
-firebase_admin.initialize_app(cred)
+# Load Firebase credentials from Streamlit secrets
+firebase_config = json.loads(st.secrets["firebase"])
+
+# Initialize Firebase using the secrets
+if not firebase_admin._apps:
+    cred = credentials.Certificate(firebase_config)
+    firebase_admin.initialize_app(cred)
+
+# Connect to Firestore
 db = firestore.client()
 
 def save_project_to_firebase(project_name, labor_cost, material_cost, equipment_cost, miscellaneous_cost, duration, predicted_cost, risk_level):
-    """Save project details to Firebase Firestore with correct data types."""
-    
+    """Save project details to Firebase Firestore."""
     project_data = {
         "Project Name": str(project_name),
         "Labor Cost (₹)": float(labor_cost),
@@ -19,7 +26,6 @@ def save_project_to_firebase(project_name, labor_cost, material_cost, equipment_
         "Predicted Total Cost (₹)": float(predicted_cost),
         "Risk Level": str(risk_level)
     }
-
     db.collection("projects").document(project_name).set(project_data)
     return True
 
