@@ -1,0 +1,10 @@
+streamlit
+joblib
+pandas
+numpy
+matplotlib
+plotly
+scikit-learn
+fpdf
+openpyxl
+firebase-admin
