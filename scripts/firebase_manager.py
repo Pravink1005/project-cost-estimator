@@ -2,8 +2,8 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import streamlit as st
 
-# Load Firebase credentials from Streamlit secrets
-firebase_config = st.secrets["firebase"]
+# Convert Streamlit Secrets to a dictionary
+firebase_config = dict(st.secrets["firebase"])
 
 # Initialize Firebase if not already initialized
 if not firebase_admin._apps:
