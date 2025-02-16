@@ -1,20 +1,26 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
 import streamlit as st
+import json
 
-# Convert Streamlit secrets into a valid dictionary
-firebase_secrets = dict(st.secrets["firebase"])
+# Convert Streamlit secrets into a proper JSON dictionary
+firebase_secrets = json.loads(json.dumps(st.secrets["firebase"]))
 
-# Ensure private_key formatting (Fixes \n issues)
+# Fix private_key formatting
 firebase_secrets["private_key"] = firebase_secrets["private_key"].replace("\\n", "\n")
 
-# Debug: Print Firebase Secrets to check structure
-st.write("✅ Firebase Secrets Loaded Successfully:", firebase_secrets)
+# Debugging: Print Firebase secrets to verify correctness
+st.write("✅ Firebase Secrets Debug:", firebase_secrets)
 
-# Initialize Firebase if not already initialized
+# Initialize Firebase only if it hasn't been initialized before
 if not firebase_admin._apps:
-    cred = credentials.Certificate(firebase_secrets)
-    firebase_admin.initialize_app(cred)
+    try:
+        cred = credentials.Certificate(firebase_secrets)
+        firebase_admin.initialize_app(cred)
+        st.success("✅ Firebase Initialized Successfully!")
+    except ValueError as e:
+        st.error(f"❌ Firebase Initialization Failed: {str(e)}")
+        st.stop()
 
 # Connect to Firestore
 db = firestore.client()
