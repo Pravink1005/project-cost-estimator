@@ -1,10 +1,10 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
 import streamlit as st
-import json
 
-# Convert Streamlit Secrets to a properly formatted dictionary
-firebase_config = json.loads(json.dumps(st.secrets["firebase"]))
+# Convert Streamlit secrets into a valid dictionary
+firebase_config = dict(st.secrets["firebase"])
+firebase_config["private_key"] = firebase_config["private_key"].replace("\\n", "\n")  # Fix private key format
 
 # Initialize Firebase if not already initialized
 if not firebase_admin._apps:
