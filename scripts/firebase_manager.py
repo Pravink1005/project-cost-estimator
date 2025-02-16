@@ -2,14 +2,14 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 import streamlit as st
 
-# 🔥 Debug: Print Firebase secrets to check structure
-st.write("🔥 Firebase Secrets Debug:", st.secrets["firebase"])
-
 # Convert Streamlit secrets into a valid dictionary
 firebase_secrets = dict(st.secrets["firebase"])
 
 # Ensure private_key formatting (Fixes \n issues)
 firebase_secrets["private_key"] = firebase_secrets["private_key"].replace("\\n", "\n")
+
+# Debug: Print Firebase Secrets to check structure
+st.write("✅ Firebase Secrets Loaded Successfully:", firebase_secrets)
 
 # Initialize Firebase if not already initialized
 if not firebase_admin._apps:
